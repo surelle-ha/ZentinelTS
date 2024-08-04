@@ -31,16 +31,5 @@ app_1.app.listen(appPort, () => {
     console.log(chalk_1.default.yellow(`${appName.toUpperCase()} SERVER RUNNING IN ${appEnv.toUpperCase()} ENVIRONMENT`));
     console.log(`\t\n\t- Local:\t${chalk_1.default.green(appBase + ":" + appPort)}`);
     showRemoteIP();
-    console.log(`\nRoutes: `);
-    app_1.app._router.stack.forEach(function (r) {
-        if (r.route && r.route.path) {
-            console.log("~", chalk_1.default.underline(r.route.stack[0].method.toUpperCase() == "POST" ? chalk_1.default.yellow(r.route.stack[0].method.toUpperCase()) :
-                r.route.stack[0].method.toUpperCase() == "GET" ? chalk_1.default.green(r.route.stack[0].method.toUpperCase()) :
-                    r.route.stack[0].method.toUpperCase() == "PATCH" ? chalk_1.default.magenta(r.route.stack[0].method.toUpperCase()) :
-                        r.route.stack[0].method.toUpperCase() == "PUT" ? chalk_1.default.blue(r.route.stack[0].method.toUpperCase()) :
-                            r.route.stack[0].method.toUpperCase() == "DELETE" ? chalk_1.default.red(r.route.stack[0].method.toUpperCase()) :
-                                chalk_1.default.cyan(r.route.stack[0].method.toUpperCase())), chalk_1.default.underline(r.route.path));
-        }
-    });
     console.log(`\nServer Logs:\n[System] App has started.`);
 });

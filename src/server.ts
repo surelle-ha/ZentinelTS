@@ -42,23 +42,5 @@ app.listen(appPort, () => {
 
 	showRemoteIP();
 
-	console.log(`\nRoutes: `);
-	app._router.stack.forEach(function (r: any) {
-		if (r.route && r.route.path) {
-			console.log(
-				"~",
-				chalk.underline(
-					r.route.stack[0].method.toUpperCase() == "POST" ? chalk.yellow(r.route.stack[0].method.toUpperCase()) :
-					r.route.stack[0].method.toUpperCase() == "GET" ? chalk.green(r.route.stack[0].method.toUpperCase()) :
-					r.route.stack[0].method.toUpperCase() == "PATCH" ? chalk.magenta(r.route.stack[0].method.toUpperCase()) :
-					r.route.stack[0].method.toUpperCase() == "PUT" ? chalk.blue(r.route.stack[0].method.toUpperCase()) :
-					r.route.stack[0].method.toUpperCase() == "DELETE" ? chalk.red(r.route.stack[0].method.toUpperCase()) :
-					chalk.cyan(r.route.stack[0].method.toUpperCase())
-				),
-				chalk.underline(r.route.path)
-			);
-		}
-	});
-
 	console.log(`\nServer Logs:\n[System] App has started.`);
 });

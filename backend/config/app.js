@@ -30,13 +30,19 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
-dotenv_1.default.config();
 const app = (0, express_1.default)();
 exports.app = app;
+// Initial Initialize
+dotenv_1.default.config();
 app.z = { sequelize: {}, logger: {}, ratelimit: {} };
+// View Set
 app.set("view engine", "ejs");
 app.set("views", path_1.default.join(__dirname, "../public"));
+// Core Middlewares
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
+// Configs
 Promise.resolve().then(() => __importStar(require("./monitor"))).then(({ default: setupMonitor }) => setupMonitor(app));
 Promise.resolve().then(() => __importStar(require("./prometheus"))).then(({ default: setupPrometheus }) => setupPrometheus(app));
 Promise.resolve().then(() => __importStar(require("./logger"))).then(({ default: setupLogger }) => setupLogger(app));

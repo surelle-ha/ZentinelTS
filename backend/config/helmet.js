@@ -16,6 +16,8 @@ exports.default = setupHelmet;
 const helmet_1 = __importDefault(require("helmet"));
 function setupHelmet(app) {
     return __awaiter(this, void 0, void 0, function* () {
-        app.use((0, helmet_1.default)());
+        app.use((0, helmet_1.default)({
+            xPoweredBy: true,
+        }));
     });
 }

@@ -1,11 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = default_1;
 const express_1 = require("express");
-function default_1(app) {
+module.exports = (app) => {
     const router = (0, express_1.Router)();
-    router.get('/users', (req, res) => {
-        res.json("wow its working!");
-    });
+    const { User } = app.z.controllers;
+    const { Authenticate, SequelizeGuard } = app.z.middlewares;
+    app.use("/api/v1/users", [Authenticate.authenticate]);
+    router.post("/users", [SequelizeGuard.authorize("create-user")], User.createUser);
+    router.get("/users", [SequelizeGuard.authorize("fetch-user")], User.getAllUsers);
+    router.get("/users/:user_id", [SequelizeGuard.authorize("fetch-user")], User.getUser);
+    router.patch("/users/:user_id", [SequelizeGuard.authorize("update-user")], User.updateUser);
+    router.delete("/users", [SequelizeGuard.authorize("delete-user")], User.deleteAllUsers);
+    router.delete("/users/:user_id", [SequelizeGuard.authorize("delete-user")], User.deleteUser);
     return router;
-}
+};

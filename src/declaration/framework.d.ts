@@ -1,4 +1,5 @@
 import * as express from 'express';
+import Request from 'express';
 
 declare global {
   namespace Express {
@@ -7,14 +8,17 @@ declare global {
         sequelize: any;
         logger: any;
         ratelimit: any;
-        controllers?: any;
-        middlewares?: any;
-        models?: any;
+        controllers?: array;
+        middlewares?: array;
+        models?: array;
         services?: any;
         utilities?: any;
-        exceptions?: any;
+        exceptions?: array;
         validations?: any;
       };
+    }
+    interface Request {
+      user: any;
     }
   }
 }
