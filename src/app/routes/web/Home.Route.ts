@@ -7,5 +7,9 @@ export default function (app: Express): Router {
         res.render("index");
     });
 
+    router.get('/store', (req, res) => {
+        res.render("store");
+    });
+
     return router;
 }

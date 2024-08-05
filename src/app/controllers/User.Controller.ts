@@ -1,6 +1,8 @@
-import { Express, Request, Response } from "express";
+require('dotenv').config()
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
+import { Express, Request, Response } from "express";
+
+const bcryptRounds: number = Number(process.env.BCRYPT_ROUNDS);
 
 module.exports = (app: Express) => {
 
@@ -11,7 +13,7 @@ module.exports = (app: Express) => {
 		name: "User",
 		createUser: async (req: Request, res: Response) => {
 			try {
-				const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+				const hashedPassword = await bcrypt.hash(req.body.password, bcryptRounds);
 				const result = await User.create({
 					...req.body,
 					role_id: 1,

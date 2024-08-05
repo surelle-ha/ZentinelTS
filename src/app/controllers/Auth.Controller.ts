@@ -1,8 +1,9 @@
+require('dotenv').config()
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 import { Express, Response, Request } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
-const saltRounds = 10;
+const bcryptRounds: number = Number(process.env.BCRYPT_ROUNDS);
 
 module.exports = function (app: Express) {
 
@@ -71,7 +72,7 @@ module.exports = function (app: Express) {
 
 				bcrypt.hash(
 					req.body.password,
-					saltRounds,
+					bcryptRounds,
 					async (err: Error | undefined, hashedPassword: string) => {
 						if (err) {
 							return res

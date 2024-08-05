@@ -8,6 +8,8 @@ declare global {
         sequelize: any;
         logger: any;
         ratelimit: any;
+        mailer: any;
+        storage: any;
         controllers?: array;
         middlewares?: array;
         models?: array;
