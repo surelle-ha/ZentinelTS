@@ -1,15 +1,25 @@
 {
-	"name": "typescript-tutorial",
+	"name": "zentinelts",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "./server/server.js",
+	"keywords": [],
+	"author": "Surelle",
+	"license": "ISC",
 	"scripts": {
+		"free-port": "kill-port --port 8800",
 		"clean": "rimraf ./server",
 		"watch": "depcheck & rimraf ./server && tsc --watch & tscp -w",
 		"build": "depcheck & rimraf ./server && tsc & tscp",
-		"free-port": "kill-port --port 8800",
-		"local:dev": "npm run build && cross-env APP_ENV=development nodemon ./server/server",
-		"local:prod": "npm run build && cross-env APP_ENV=production nodemon ./server/server",
+		"key:generate": "node -e \"console.log(`Generated Key: ${require('crypto').randomBytes(32).toString('hex')}`);\"",
+		"start:dev": "npm run build && cross-env APP_ENV=development nodemon ./server/server",
+		"start:prod": "npm run build && cross-env APP_ENV=production nodemon ./server/server",
+		"pm2": "pm2 monit",
+		"pm2:dev": "npm run build && pm2 start pm2.config.js",
+		"pm2:prod": "npm run build && pm2 start pm2.config.js --env production",
+		"pm2:restart": "pm2 restart pm2.config.js",
+		"pm2:stop": "pm2 stop pm2.config.js",
+		"pm2:delete": "pm2 delete pm2.config.js",
 		"db:up": "npm run db:create && npm run db:migrate",
 		"db:reset": "npm run db:drop && npm run db:up && npx sequelize db:seed:all",
 		"db:create": "npx sequelize db:create",
@@ -19,9 +29,6 @@
 		"db:rollback:all": "npx sequelize db:migrate:undo:all",
 		"db:migrate:create": "npx sequelize-cli migration:generate --name"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
 	"dependencies": {
 		"@faker-js/faker": "^8.4.1",
 		"@types/bcrypt": "^5.0.2",
@@ -55,7 +62,8 @@
 		"pino-pretty": "^11.2.2",
 		"sequelize": "^6.37.3",
 		"typescript-tutorial": "file:",
-		"uuid": "^10.0.0"
+		"uuid": "^10.0.0",
+		"zentinelts": "file:"
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.21",
