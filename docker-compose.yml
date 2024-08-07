@@ -1,0 +1,105 @@
+version: "3.8"
+
+services:
+  app:
+    image: surelle/zentinel-app:latest
+    ports:
+      - target: 8800
+        published: 80
+        mode: host
+    env_file:
+      - .env
+    environment:
+      DATABASE_HOST: mysql
+    depends_on:
+      - mysql
+    networks:
+      - zentinel-network
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.7"
+          memory: 300M
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Izukishun@30
+      MYSQL_DATABASE: ardeux
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - zentinel-network
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - target: 80
+        published: 8111
+        mode: host
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    networks:
+      - zentinel-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - zentinel-network
+    deploy:
+      replicas: 1
+
+  redisinsight:
+    image: redis/redisinsight
+    ports:
+      - target: 5540
+        published: 5540
+        mode: host
+    networks:
+      - zentinel-network
+    deploy:
+      replicas: 1
+
+  # sonarqube:
+  #   image: sonarqube:latest
+  #   ports:
+  #     - "9000:9000"
+  #   networks:
+  #     - zentinel-network
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+  #   networks:
+  #     - zentinel-network
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - grafana-storage:/var/lib/grafana
+  #   networks:
+  #     - zentinel-network
+
+networks:
+  zentinel-network:
+    driver: overlay
+
+volumes:
+  mysql-data:
+  runner-data:
+  # grafana-storage:
