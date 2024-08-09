@@ -12,7 +12,7 @@ const appEnv = env.APP_ENV || "development";
 const appBase = env.APP_BASE || "http://localhost";
 
 server.listen(appPort, () => {
-	clear();
+	// clear();
 	console.log(
 		chalk.blue(
 			figlet.textSync(appName, {

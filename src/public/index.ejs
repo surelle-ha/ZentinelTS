@@ -1,121 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>ZentinelJS</title>
-		<link rel="stylesheet" href="css/style.css" />
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-		/>
-		<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-	</head>
-	<body>
-		<div class="header">
-			<!--Content before waves-->
-			<div class="inner-header flex">
-				<!--Just the logo.. Don't mind this-->
-				<div class="svg-container">
-					<svg
-						id="sendMessage"
-						class="rotating-svg"
-						fill="#ffffff"
-						version="1.0"
-						id="Layer_1"
-						xmlns="http://www.w3.org/2000/svg"
-						xmlns:xlink="http://www.w3.org/1999/xlink"
-						width="50px"
-						height="50px"
-						viewBox="0 0 64 64"
-						enable-background="new 0 0 64 64"
-						xml:space="preserve"
-					>
-						<g>
-							<path
-								d="M32,14c-9.941,0-18,8.059-18,18s8.059,18,18,18s18-8.059,18-18S41.941,14,32,14z M32,38c-3.313,0-6-2.687-6-6s2.687-6,6-6
-		s6,2.687,6,6S35.313,38,32,38z"
-							/>
-							<circle cx="32" cy="32" r="4" />
-							<circle cx="56" cy="56" r="1" />
-							<circle cx="8" cy="8" r="1" />
-							<circle cx="8" cy="56" r="1" />
-							<circle cx="56" cy="8" r="1" />
-							<path
-								d="M61.657,50.343l-2.093-2.093C62.379,43.486,64,37.934,64,32c0-5.935-1.621-11.488-4.437-16.252l2.093-2.092
-		c3.124-3.124,3.125-8.189,0.001-11.313s-8.19-3.124-11.314,0L48.25,4.436C43.486,1.621,37.934,0,32,0
-		c-5.935,0-11.487,1.621-16.252,4.436l-2.092-2.092C10.532-0.78,5.467-0.781,2.343,2.343s-3.124,8.19,0,11.314l2.093,2.093
-		C1.621,20.514,0,26.066,0,32c0,5.935,1.621,11.488,4.437,16.252l-2.093,2.092c-3.124,3.124-3.125,8.189-0.001,11.313
-		s8.19,3.124,11.314,0l2.093-2.093C20.514,62.379,26.066,64,32,64c5.935,0,11.487-1.621,16.252-4.436l2.092,2.092
-		c3.124,3.124,8.189,3.125,11.313,0.001S64.781,53.467,61.657,50.343z M8,59c-1.657,0-3-1.344-3-3s1.343-3,3-3s3,1.344,3,3
-		S9.657,59,8,59z M8,11c-1.657,0-3-1.344-3-3s1.343-3,3-3s3,1.344,3,3S9.657,11,8,11z M32,52c-11.046,0-20-8.954-20-20
-		s8.954-20,20-20s20,8.954,20,20S43.046,52,32,52z M56,59c-1.657,0-3-1.344-3-3s1.343-3,3-3s3,1.344,3,3S57.657,59,56,59z M56,11
-		c-1.657,0-3-1.344-3-3s1.343-3,3-3s3,1.344,3,3S57.657,11,56,11z"
-							/>
-						</g>
-					</svg>
-				</div>
-				<h1>&nbsp;ZentinelJS</h1>
-			</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ZentinelJS</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <!--Content before waves-->
+      <div class="inner-header flex">
+        <!--Just the logo.. Don't mind this-->
+        <div class="svg-container">
+          <svg
+            id="sendMessage"
+            height="60px"
+            width="60px"
+            version="1.1"
+            id="_x32_"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 512 512"
+            xml:space="preserve"
+          >
+            <style type="text/css">
+              .st0 {
+                fill: white;
+              }
+            </style>
+            <g>
+              <path
+                class="st0"
+                d="M479.949,409.402L353.612,207.617c-10.665-17.049-16.32-36.732-16.32-56.837L337.47,0.164L175.507,0
+		l-0.164,150.498c-0.024,20.128-5.726,39.858-16.438,56.906L32.122,408.932c-6.83,10.865-10.276,23.268-10.276,35.673
+		c0,11.122,2.763,22.293,8.324,32.381c11.805,21.374,34.251,34.638,58.648,34.662L423.054,512h0.022
+		c0.906,0,1.364-0.047,1.376-0.047l-0.012-0.048c23.856-0.47,45.702-13.521,57.318-34.426v-0.024
+		c5.61-10.111,8.396-21.316,8.396-32.486C490.154,432.612,486.733,420.243,479.949,409.402z M447.556,458.514
+		c-4.915,8.877-14.273,14.403-24.42,14.379c-0.106,0-0.129,0.024-0.2,0.024l-334.082-0.365c-10.159-0.012-19.542-5.549-24.432-14.45
+		c-2.341-4.233-3.481-8.842-3.481-13.498c0-5.186,1.423-10.323,4.28-14.862l126.76-201.515c14.65-23.28,22.41-50.193,22.456-77.706
+		l0.118-111.392l83.774,0.094l-0.129,111.416v0.047v0.094c0,27.442,7.725,54.308,22.28,77.578l126.325,201.784
+		c2.834,4.515,4.256,9.666,4.268,14.827C451.06,449.637,449.907,454.269,447.556,458.514z"
+              />
+              <path
+                class="st0"
+                d="M323.642,291.296c-1.434-2.316-3.973-3.716-6.689-3.716l-121.551-0.129c-2.728,0-5.268,1.387-6.703,3.704
+		L101.504,429.72c-1.528,2.445-1.622,5.526-0.223,8.054c1.387,2.528,4.044,4.08,6.925,4.08l295.599,0.318
+		c2.881,0.011,5.526-1.541,6.937-4.068c1.387-2.528,1.305-5.597-0.234-8.03L323.642,291.296z"
+              />
+            </g>
+          </svg>
+        </div>
+        <h1>&nbsp;ZentinelJS</h1>
+      </div>
 
-			<!--Waves Container-->
-			<div>
-				<svg
-					class="waves"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="0 24 150 28"
-					preserveAspectRatio="none"
-					shape-rendering="auto"
-				>
-					<defs>
-						<path
-							id="gentle-wave"
-							d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-						/>
-					</defs>
-					<g class="parallax">
-						<use
-							xlink:href="#gentle-wave"
-							x="48"
-							y="0"
-							fill="rgba(255,255,255,0.7"
-						/>
-						<use
-							xlink:href="#gentle-wave"
-							x="48"
-							y="3"
-							fill="rgba(255,255,255,0.5)"
-						/>
-						<use
-							xlink:href="#gentle-wave"
-							x="48"
-							y="5"
-							fill="rgba(255,255,255,0.3)"
-						/>
-						<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-					</g>
-				</svg>
-			</div>
-			<!--Waves end-->
-		</div>
-		<!--Header ends-->
+      <!--Waves Container-->
+      <div>
+        <svg
+          class="waves"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28"
+          preserveAspectRatio="none"
+          shape-rendering="auto"
+        >
+          <defs>
+            <path
+              id="gentle-wave"
+              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+            />
+          </defs>
+          <g class="parallax">
+            <use
+              xlink:href="#gentle-wave"
+              x="48"
+              y="0"
+              fill="rgba(255,255,255,0.7"
+            />
+            <use
+              xlink:href="#gentle-wave"
+              x="48"
+              y="3"
+              fill="rgba(255,255,255,0.5)"
+            />
+            <use
+              xlink:href="#gentle-wave"
+              x="48"
+              y="5"
+              fill="rgba(255,255,255,0.3)"
+            />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+          </g>
+        </svg>
+      </div>
+      <!--Waves end-->
+    </div>
+    <!--Header ends-->
 
-		<!--Content starts-->
-		<div class="content flex">
-			<p>
-				<a href="https://docs.zentinel.ltd/">Documentation</a> | Boilerplate by
-				<a href="https://github.com/surelle-ha/">Surelle</a> | Landing by
-				<a href="https://codepen.io/goodkatz">Goodkatz</a> | &copy; <%= new
-				Date().getFullYear() %>
-			</p>
-		</div>
-		<!--Content ends-->
-		<!-- partial -->
-		<script
-			type="text/javascript"
-			src="https://cdn.jsdelivr.net/npm/toastify-js"
-		></script>
-		<script type="text/javascript" src="./js/socket.js"></script>
-	</body>
+    <!--Content starts-->
+    <div class="content flex">
+      <p>
+        <a href="https://docs.zentinel.ltd/">Documentation</a> | Boilerplate by
+        <a href="https://github.com/surelle-ha/">Surelle</a> | Landing by
+        <a href="https://codepen.io/goodkatz">Goodkatz</a> | &copy; <%= new
+        Date().getFullYear() %>
+      </p>
+    </div>
+    <!--Content ends-->
+    <!-- partial -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script type="text/javascript" src="./js/socket.js"></script>
+  </body>
 </html>

@@ -21,6 +21,7 @@ declare global {
         utilities?: any;
         exceptions?: array;
         validations?: any;
+        config?: any;
       };
     }
     interface Request {
