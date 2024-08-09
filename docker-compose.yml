@@ -11,8 +11,10 @@ services:
       - .env
     environment:
       DATABASE_HOST: mysql
+      REDIS_HOST: redis
     depends_on:
       - mysql
+      - redis
     networks:
       - zentinel-network
     deploy:

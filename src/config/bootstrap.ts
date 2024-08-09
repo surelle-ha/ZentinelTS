@@ -107,7 +107,7 @@ const loadExceptions = async (app: Express) => {
     }
 };
 
-export default async function bootstrapRoutes(app: Express): Promise<void> {
+module.exports = async function bootstrapRoutes(app: Express): Promise<void> {
 	await loadExceptions(app);
     await loadModels(app);
 	await loadMiddlewares(app);

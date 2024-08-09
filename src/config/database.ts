@@ -1,18 +1,12 @@
 import { Express } from "express";
 import { Sequelize } from "sequelize";
 
-const dbName: string = process.env.DATABASE_NAME || "zentinel_db";
-const dbUser: string = process.env.DATABASE_USER || "root";
-const dbPass: string = process.env.DATABASE_PASS || "";
-const dbHost: string = process.env.DATABASE_HOST || "localhost";
-const dbPort: number = Number(process.env.DATABASE_PORT) || 3306;
-const dbType: string = process.env.DATABASE_TYPE || "mysql";
-
-export default async function setupDatabase(app: Express): Promise<void> {
-	app.z.sequelize = new Sequelize(dbName, dbUser, dbPass, {
-		host: dbHost,
-		port: dbPort,
-		dialect: dbType as "mysql" | "postgres" | "sqlite" | "mssql",
+module.exports = async function setupDatabase(app: Express): Promise<void> {
+	const { env } = app.z;
+	app.z.sequelize = new Sequelize(env.DATABASE_NAME || "zentinel_db", env.DATABASE_USER || "root", env.DATABASE_PASS || "", {
+		host: env.DATABASE_HOST || "localhost",
+		port: Number(env.DATABASE_PORT) || 3306,
+		dialect: (env.DATABASE_TYPE || "mysql") as "mysql" | "postgres" | "sqlite" | "mssql",
 		logging: false,
 	});
 	try {

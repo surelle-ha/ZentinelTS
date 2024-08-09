@@ -1,7 +1,7 @@
 import { Express } from 'express';
 const promMid = require("express-prometheus-middleware");
 
-export default async function setupPrometheus(app: Express): Promise<void> {
+module.exports = async function setupPrometheus(app: Express): Promise<void> {
     app.use(
         promMid({
             metricsPath: "/metrics",

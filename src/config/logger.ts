@@ -33,7 +33,7 @@ const logger: any = pino(
     ])
 );
 
-export default function setupLogger(app: Express): void {
+module.exports = function setupLogger(app: Express): void {
     app.z.logger = logger;
     app.use(expressPino({ logger }));
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {

@@ -1,8 +1,9 @@
 import { Express } from 'express';
 import helmet from 'helmet';
 
-export default async function setupHelmet(app: Express): Promise<void> {
+module.exports = async function setupHelmet(app: Express): Promise<void> {
     app.use(helmet({
         xPoweredBy: true,
+        contentSecurityPolicy: false,
     }))
 }

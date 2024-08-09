@@ -4,18 +4,21 @@
 		<meta charset="UTF-8" />
 		<title>ZentinelJS</title>
 		<link rel="stylesheet" href="css/style.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+		/>
+		<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 	</head>
 	<body>
-		<!-- partial:index.partial.html -->
-		<!--Hey! This is the original version
-of Simple CSS Waves-->
-
 		<div class="header">
 			<!--Content before waves-->
 			<div class="inner-header flex">
 				<!--Just the logo.. Don't mind this-->
 				<div class="svg-container">
 					<svg
+						id="sendMessage"
 						class="rotating-svg"
 						fill="#ffffff"
 						version="1.0"
@@ -109,5 +112,10 @@ of Simple CSS Waves-->
 		</div>
 		<!--Content ends-->
 		<!-- partial -->
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/toastify-js"
+		></script>
+		<script type="text/javascript" src="./js/socket.js"></script>
 	</body>
 </html>

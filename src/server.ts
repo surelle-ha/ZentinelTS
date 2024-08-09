@@ -1,17 +1,36 @@
-import { app } from "./config/app";
-import figlet from "figlet";
-import chalk from "chalk";
-import os from "os";
-import dotenv from "dotenv";
+const { app } = require("./config/app");
+const clear = require("clear-screen");
+const figlet = require("figlet");
+const chalk = require("chalk");
+const os = require("os");
 
-dotenv.config();
+const { env, server, logger } = app.z;
 
-const appName = process.env.APP_NAME || "DefaultAppName";
-const appPort = process.env.APP_PORT || "3000";
-const appEnv = process.env.APP_ENV || "development";
-const appBase = process.env.APP_BASE || "http://localhost";
+const appName = env.APP_NAME || "DefaultAppName";
+const appPort = env.APP_PORT || "3000";
+const appEnv = env.APP_ENV || "development";
+const appBase = env.APP_BASE || "http://localhost";
 
-const showRemoteIP = () => {
+server.listen(appPort, () => {
+	clear();
+	console.log(
+		chalk.blue(
+			figlet.textSync(appName, {
+				font: "Ogre",
+				horizontalLayout: "full",
+				verticalLayout: "default",
+				width: 80,
+				whitespaceBreak: true,
+			})
+		)
+	);
+	console.log(
+		chalk.blue(
+			`${appName.toUpperCase()} SERVER RUNNING IN ${appEnv.toUpperCase()} ENVIRONMENT`
+		)
+	);
+	console.log(`\t\n\t- Local:\t${chalk.green(appBase + ":" + appPort)}`);
+
 	const networkInterfaces = os.networkInterfaces();
 	for (const interfaceName in networkInterfaces) {
 		const interfaceInfo = networkInterfaces[interfaceName];
@@ -27,20 +46,7 @@ const showRemoteIP = () => {
 			}
 		}
 	}
-};
 
-app.listen(appPort, () => {
-	console.log(
-		chalk.yellow(figlet.textSync(appName, { horizontalLayout: "full" }))
-	);
-	console.log(
-		chalk.yellow(
-			`${appName.toUpperCase()} SERVER RUNNING IN ${appEnv.toUpperCase()} ENVIRONMENT`
-		)
-	);
-	console.log(`\t\n\t- Local:\t${chalk.green(appBase + ":" + appPort)}`);
-
-	showRemoteIP();
-
-	console.log(`\nServer Logs:\n[System] App has started.`);
+	console.log(chalk.blue(`\nServer Logs:`));
+	logger.info(chalk.yellow(`${appName} has started.`));
 });

@@ -1,12 +1,12 @@
-require("dotenv").config();
 import { Express, Request, Response, NextFunction } from "express";
 
-export default async function setupMaintenance(app: Express): Promise<void> {
+module.exports = async function setupMaintenance(app: Express): Promise<void> {
+	const { env } = app.z;
 	app.use((req: Request, res: Response, next: NextFunction) => {
 		const maintenanceMode =
-			(process.env.MAINTENANCE_MODE || "false").toLowerCase() === "true";
+			(env.MAINTENANCE_MODE || "false").toLowerCase() === "true";
 		if (maintenanceMode) {
-			if (req.headers["maintenance-key"] === process.env.MAINTENANCE_KEY) {
+			if (req.headers["maintenance-key"] === env.MAINTENANCE_KEY) {
 				return next();
 			}
 			return res.status(503).json({

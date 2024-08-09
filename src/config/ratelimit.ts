@@ -1,7 +1,7 @@
 import { Express, Request } from 'express';
 const rateLimit = require("express-rate-limit");
 
-export default async function setupRatelimit(app: Express): Promise<void> {
+module.exports = async function setupRatelimit(app: Express): Promise<void> {
 	const windowM = 15;
 	const exemptedEndpoints = ["/api/v1/webhook/ratelimit/reset"];
 

@@ -1,6 +1,7 @@
 import { Express, Request, Response, NextFunction } from "express";
 
-export default async function setupException(app: Express): Promise<void> {
+module.exports = async function setupException(app: Express): Promise<void> {
+	const { env } = app.z;
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         let message;
         try {
@@ -12,7 +13,7 @@ export default async function setupException(app: Express): Promise<void> {
             success: err.success || false,
             message,
             error: err.name || 'Error',
-            ...(process.env.APP_ENV !== "production" ? { stack: err.stack } : {}),
+            ...(env.APP_ENV !== "production" ? { stack: err.stack } : {}),
         });
     });
 };
