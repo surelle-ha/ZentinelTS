@@ -12,6 +12,8 @@ services:
     environment:
       DATABASE_HOST: mysql
       REDIS_HOST: redis
+    volumes:
+      - ./volume/app-storage:/server/storage
     depends_on:
       - mysql
       - redis
@@ -30,7 +32,7 @@ services:
       MYSQL_ROOT_PASSWORD: Izukishun@30
       MYSQL_DATABASE: ardeux
     volumes:
-      - mysql-data:/var/lib/mysql
+      - ./volume/mysql-data:/var/lib/mysql
     networks:
       - zentinel-network
     deploy:
@@ -58,6 +60,8 @@ services:
       - "6379:6379"
     networks:
       - zentinel-network
+    volumes:
+      - ./volume/redis-data:/data
     deploy:
       replicas: 1
 
@@ -69,6 +73,8 @@ services:
         mode: host
     networks:
       - zentinel-network
+    volumes:
+      - ./volume/redis-insight:/data
     deploy:
       replicas: 1
 
@@ -112,15 +118,10 @@ services:
         published: 3000
         mode: host
     volumes:
-      - grafana-storage:/var/lib/grafana
+      - ./volume/grafana-storage:/var/lib/grafana
     networks:
       - zentinel-network
 
 networks:
   zentinel-network:
     driver: overlay
-
-volumes:
-  mysql-data:
-  runner-data:
-  grafana-storage:
