@@ -6,7 +6,7 @@ module.exports = async function setupSocket(app: Express) {
 	app.z.server = createServer(app);
 	app.z.socket = new Server(app.z.server);
 
-    const { logger, socket: io} = app.z;
+	const { logger, socket: io } = app.z;
 
 	io.on("connection", (socket: any) => {
 		logger.info(`User Connected: UC: ${io.engine.clientsCount}`);
@@ -20,4 +20,4 @@ module.exports = async function setupSocket(app: Express) {
 			logger.info(`User Disconnected. UC: ${socket.engine.clientsCount}`);
 		});
 	});
-}
+};
