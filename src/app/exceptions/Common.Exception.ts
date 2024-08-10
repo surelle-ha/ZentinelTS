@@ -15,14 +15,8 @@ module.exports = function (app: Express) {
 	class ValidationError extends Error {
 		success: boolean;
 		statusCode: number;
-		constructor(message: string) {
-			if (typeof message === "object") {
-				message = JSON.stringify(message, null, 2);
-			} else if (Array.isArray(message)) {
-				message = message.join(", ");
-			}
-
-			super(message);
+		constructor(message: object) {
+			super(JSON.stringify(message, null, 2));
 			this.success = false;
 			this.name = "ValidationError";
 			this.statusCode = 400;

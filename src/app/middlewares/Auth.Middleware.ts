@@ -6,7 +6,7 @@ module.exports = function (app: Express) {
 	const { User, Session } = app.z.models;
 	
 	const Middleware = {
-		name: "Authenticate",
+		name: "Auth",
 		authenticate: async (req: Request, res: Response, next: NextFunction) => {
 			try {
 				const token = req.headers.authorization?.split(" ")[1];

@@ -38,6 +38,6 @@ module.exports = function setupLogger(app: Express): void {
     app.use(expressPino({ logger }));
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         logger.error(err.message);
-        res.status(500).send("Something went wrong!");
+        res.status(500).json("Something went wrong!");
     });
 }

@@ -2,24 +2,24 @@ import { Express, Router } from "express";
 
 module.exports = (app: Express): Router => {
 	const router = Router();
-	const { Auth } = app.z.controllers;
-	const { Authenticate } = app.z.middlewares;
-	// const { Auth } = app.z.validations;
-
+	const { Auth: AuthController } = app.z.controllers;
+	const { Auth: AuthMiddleware } = app.z.middlewares;
+	const { Auth: AuthValidation } = app.z.validations;
+	console.log(AuthValidation.check)
 	router.post(
 		"/auth/login",
-		// [AuthValidation.check.login],
-		Auth.loginUser
+		[AuthValidation.check.login],
+		AuthController.loginUser
 	);
 	router.post(
 		"/auth/register",
-		// [AuthValidation.check.register],
-		Auth.registerUser
+		[AuthValidation.check.register],
+		AuthController.registerUser
 	);
 	router.post(
 		"/auth/logout",
-		// [AuthenticateMiddleware.authenticate],
-		Auth.logoutUser
+		[AuthMiddleware.authenticate],
+		AuthController.logoutUser
 	);
 
 	return router;

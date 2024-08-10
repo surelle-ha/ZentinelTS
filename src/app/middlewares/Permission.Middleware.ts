@@ -4,13 +4,13 @@ module.exports = function (app: Express) {
 	const { User, Role, Permission } = app.z.models;
 	
 	const Middleware = {
-		name: "SequelizeGuard",
+		name: "Permission",
 		authorize:
 			(requiredPermission: string) =>
 			async (req: Request, res: Response, next: NextFunction) => {
 				try {
 					if (!req.user.id) {
-						return res.status(403).send({
+						return res.status(403).json({
 							message:
 								"User ID not found in request. User may not be authenticated.",
 						});
@@ -34,7 +34,7 @@ module.exports = function (app: Express) {
 					if (!user || !user.Role) {
 						return res
 							.status(403)
-							.send({ message: "Access denied. No role found." });
+							.json({ message: "Access denied. No role found." });
 					}
 
 					const permissions = user.Role.Permissions.map(
@@ -43,14 +43,14 @@ module.exports = function (app: Express) {
 					if (permissions.includes(requiredPermission)) {
 						next();
 					} else {
-						return res.status(403).send({
+						return res.status(403).json({
 							message:
 								"Access denied. You do not have the required permission.",
 						});
 					}
 				} catch (error) {
 					console.error("Permission Check Error:", error);
-					res.status(500).send({ message: "Internal Server Error" });
+					res.status(500).json({ message: "Internal Server Error" });
 				}
 			},
 	};

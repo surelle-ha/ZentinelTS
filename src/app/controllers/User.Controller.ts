@@ -21,9 +21,9 @@ module.exports = (app: Express) => {
 					status: "Active",
 					password: hashedPassword,
 				});
-				res.status(201).send({ message: "Account created", userData: result });
+				res.status(201).json({ message: "Account created", userData: result });
 			} catch (err: any) {
-				res.status(500).send({ error: "Server Error", message: err.message });
+				res.status(500).json({ error: "Server Error", message: err.message });
 			}
 		},
 		getUser: async (req: Request, res: Response) => {
@@ -37,21 +37,21 @@ module.exports = (app: Express) => {
 				const userData = user.get({ plain: true });
 				userData.role = userData.Role;
 				delete userData.Role;
-				res.status(200).send(userData);
+				res.status(200).json(userData);
 			} catch (err: any) {
 				if (err instanceof NotFoundError) {
-					res.status(404).send({ message: err.message });
+					res.status(404).json({ message: err.message });
 				} else {
-					res.status(500).send({ error: "Server Error", message: err.message });
+					res.status(500).json({ error: "Server Error", message: err.message });
 				}
 			}
 		},
 		getAllUsers: async (req: Request, res: Response) => {
 			try {
 				const users = await User.findAll();
-				res.status(200).send(users);
+				res.status(200).json(users);
 			} catch (err: any) {
-				res.status(500).send({ error: "Server Error", message: err.message });
+				res.status(500).json({ error: "Server Error", message: err.message });
 			}
 		},
 		updateUser: async (req: Request, res: Response) => {
@@ -62,11 +62,11 @@ module.exports = (app: Express) => {
 					plain: true,
 				});
 				if (!updated) {
-					return res.status(404).send({ message: "User not found" });
+					return res.status(404).json({ message: "User not found" });
 				}
-				res.status(200).send({ message: "User updated" });
+				res.status(200).json({ message: "User updated" });
 			} catch (err: any) {
-				res.status(500).send({ error: "Server Error", message: err.message });
+				res.status(500).json({ error: "Server Error", message: err.message });
 			}
 		},
 		deleteUser: async (req: Request, res: Response) => {
@@ -75,19 +75,19 @@ module.exports = (app: Express) => {
 					where: { id: req.params.user_id },
 				});
 				if (!deleted) {
-					return res.status(404).send({ message: "User not found" });
+					return res.status(404).json({ message: "User not found" });
 				}
-				res.status(200).send({ message: "User deleted" });
+				res.status(200).json({ message: "User deleted" });
 			} catch (err: any) {
-				res.status(500).send({ error: "Server Error", message: err.message });
+				res.status(500).json({ error: "Server Error", message: err.message });
 			}
 		},
 		deleteAllUsers: async (req: Request, res: Response) => {
 			try {
 				await User.destroy({ where: {} });
-				res.status(200).send({ message: "All users deleted" });
+				res.status(200).json({ message: "All users deleted" });
 			} catch (err: any) {
-				res.status(500).send({ error: "Server Error", message: err.message });
+				res.status(500).json({ error: "Server Error", message: err.message });
 			}
 		},
 	};

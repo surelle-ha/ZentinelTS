@@ -2,45 +2,45 @@ import { Express, Router } from "express";
 
 module.exports = (app: Express): Router => {
 	const router = Router();
-	const { User } = app.z.controllers;
-	const { Authenticate, SequelizeGuard } = app.z.middlewares;
+	const { User: UserController } = app.z.controllers;
+	const { Auth: AuthMiddleware, Permission: PermissionMiddleware } = app.z.middlewares;
 
-	app.use("/api/v1/users", [Authenticate.authenticate]);
+	app.use("/api/v1/users", [AuthMiddleware.authenticate]);
 
 	router.post(
 		"/users",
-		[SequelizeGuard.authorize("create-user")],
-		User.createUser
+		[PermissionMiddleware.authorize("create-user")],
+		UserController.createUser
 	);
 
 	router.get(
 		"/users",
-		[SequelizeGuard.authorize("fetch-user")],
-		User.getAllUsers
+		[PermissionMiddleware.authorize("fetch-user")],
+		UserController.getAllUsers
 	);
 
 	router.get(
 		"/users/:user_id",
-		[SequelizeGuard.authorize("fetch-user")],
-		User.getUser
+		[PermissionMiddleware.authorize("fetch-user")],
+		UserController.getUser
 	);
 
 	router.patch(
 		"/users/:user_id",
-		[SequelizeGuard.authorize("update-user")],
-		User.updateUser
+		[PermissionMiddleware.authorize("update-user")],
+		UserController.updateUser
 	);
 
 	router.delete(
 		"/users",
-		[SequelizeGuard.authorize("delete-user")],
-		User.deleteAllUsers
+		[PermissionMiddleware.authorize("delete-user")],
+		UserController.deleteAllUsers
 	);
     
 	router.delete(
 		"/users/:user_id",
-		[SequelizeGuard.authorize("delete-user")],
-		User.deleteUser
+		[PermissionMiddleware.authorize("delete-user")],
+		UserController.deleteUser
 	);
 
 	return router;

@@ -10,7 +10,6 @@ function asyncHandler(fn: Function) {
 }
 
 const loadControllers = async (app: Express) => {
-    app.z = app.z || {};
     app.z.controllers = {};
     const controllersPath = join(__dirname, "../app/controllers");
     
@@ -32,7 +31,6 @@ const loadControllers = async (app: Express) => {
 };
 
 const loadModels = async (app: Express) => {
-    app.z = app.z || {};
     app.z.models = app.z.models || {};
     const modelsPath = join(__dirname, "../app/models");
     
@@ -78,7 +76,6 @@ const loadRoutes = async (
 };
 
 const loadMiddlewares = async (app: Express) => {
-    app.z = app.z || {};
     app.z.middlewares = {};
     const middlewaresPath = join(__dirname, "../app/middlewares");
     
@@ -92,8 +89,21 @@ const loadMiddlewares = async (app: Express) => {
     }
 };
 
+const loadValidations = async (app: Express) => {
+    app.z.validations = {};
+    const validationsPath = join(__dirname, "../app/validations");
+    
+    const files = await fsPromises.readdir(validationsPath);
+    for (const file of files) {
+        if (file !== "__i.js" && extname(file) === ".js") {
+            const validationPath = join(validationsPath, file);
+            const validation = require(validationPath)(app);
+            app.z.validations[validation.name] = validation;
+        }
+    }
+};
+
 const loadExceptions = async (app: Express) => {
-    app.z = app.z || {};
     app.z.exceptions = {};
     const exceptionsPath = join(__dirname, "../app/exceptions");
     
@@ -109,6 +119,7 @@ const loadExceptions = async (app: Express) => {
 
 module.exports = async function bootstrapRoutes(app: Express): Promise<void> {
 	await loadExceptions(app);
+    await loadValidations(app);
     await loadModels(app);
 	await loadMiddlewares(app);
     await loadControllers(app);

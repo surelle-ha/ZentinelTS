@@ -1,4 +1,4 @@
-const { app } = require("./config/app");
+const app = require("./config/app");
 const clear = require("clear-screen");
 const figlet = require("figlet");
 const chalk = require("chalk");

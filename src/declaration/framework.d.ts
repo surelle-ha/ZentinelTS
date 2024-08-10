@@ -17,6 +17,7 @@ declare global {
         controllers?: array;
         middlewares?: array;
         models?: array;
+        validations?: array;
         services?: any;
         utilities?: any;
         exceptions?: array;
