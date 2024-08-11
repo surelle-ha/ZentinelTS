@@ -2,35 +2,23 @@ require("dotenv").config();
 
 const zentinel = {
     app: {
-        version: "1.0.5",
-        alias: {},
+        name: process.env.APP_NAME,
+        version: process.env.APP_VERSION
     },
+    
     config: {
         /**********************************************
-         * MONITOR:
-         * Enables monitoring of application performance and health metrics.
-         * Once enabled, you may access the monitor at /health/status
+         * Compress:
+         * Enables compression to reduce the size of responses and improve performance.
          **********************************************/
-        monitor: true,
+        compress: true,
 
         /**********************************************
-         * STORAGE:
-         * This will add storage functionality to your web application.
-         * Using multer, you can manage the file uploads easily.
+         * Redis:
+         * Configures the use of Redis for caching and rate limiting to enhance scalability
+         * and prevent abuse while ensuring fair usage.
          **********************************************/
-        storage: true,
-
-        /**********************************************
-         * MAILER:
-         * Configures the mailer service for sending emails.
-         **********************************************/
-        mailer: true,
-
-        /**********************************************
-         * DATABASE:
-         * Enables database connection and management.
-         **********************************************/
-        database: true,
+        redis: false,
 
         /**********************************************
          * RATELIMITER:
@@ -51,18 +39,6 @@ const zentinel = {
         cors: true,
 
         /**********************************************
-         * LOGGER:
-         * Enables logging of application events and errors.
-         **********************************************/
-        logger: true,
-
-        /**********************************************
-         * CACHE:
-         * Manages caching mechanisms for improved performance.
-         **********************************************/
-        cache: false,
-
-        /**********************************************
          * PROMETHEUS:
          * Exposes metrics for monitoring and 
          * alerting with Prometheus. Once activated, 
@@ -70,6 +46,7 @@ const zentinel = {
          **********************************************/
         prometheus: true,
     },
+
     /**********************************************
      * Below are the required configuration for
      * Sequelize ORM. Only modify this if you know

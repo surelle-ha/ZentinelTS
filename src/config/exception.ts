@@ -18,7 +18,7 @@ module.exports = async function setupException(app: Express): Promise<void> {
 		});
 	});
 
-	app.get("*", function (req, res) {
-		res.status(404).json({ error: "The requested resource was not found." });
-	});
+	// app.get("*", function (req, res) {
+	// 	res.status(404).json({ error: "The requested resource was not found." });
+	// });
 };

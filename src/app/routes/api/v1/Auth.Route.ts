@@ -5,7 +5,7 @@ module.exports = (app: Express): Router => {
 	const { Auth: AuthController } = app.z.controllers;
 	const { Auth: AuthMiddleware } = app.z.middlewares;
 	const { Auth: AuthValidation } = app.z.validations;
-	console.log(AuthValidation.check)
+	
 	router.post(
 		"/auth/login",
 		[AuthValidation.check.login],

@@ -11,6 +11,7 @@ declare global {
         logger: any;
         ratelimit: any;
         mailer: any;
+        redis:any;
         cache:any;
         storage: any;
         socket: any;
