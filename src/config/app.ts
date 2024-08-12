@@ -1,8 +1,5 @@
 import express, { Express } from "express";
-const responseTime = require("response-time");
-const xss = require("xss-clean");
 const path = require("path");
-var enforce = require("express-sslify");
 const schedule = require("node-schedule");
 
 const app: Express = express();
@@ -23,24 +20,21 @@ app.z = {
 
 // Get Config
 require("../../zentinel.config").init(app);
+const { config } = app.z;
 
 // View Set
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../public"));
 
-// Core Middlewares
+// Configs
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
-app.use(responseTime());
-app.use(xss());
-// app.use(enforce.HTTPS());
-// schedule.scheduleJob("* * * * * *", function () {
-// 	console.log("The answer to life, the universe, and everything!");
-// });
 
-// Configs
-require("./environment")(app);
+if (config.include_response_time) app.use(require("response-time")());
+if (config.sanitize_request) app.use(require("xss-clean")());
+if (config.force_https) app.use(require('express-sslify').HTTPS());
+
 require("./logger")(app);
 require("./database")(app);
 require("./socket")(app);
@@ -48,12 +42,12 @@ require("./cache")(app);
 require("./storage")(app);
 require("./mailer")(app);
 
-if (app.z.config.compress) require("./compress")(app);
-if (app.z.config.prometheus) require("./prometheus")(app);
-if (app.z.config.redis) require("./redis")(app);
-if (app.z.config.helmet) require("./helmet")(app);
-if (app.z.config.cors) require("./cors")(app);
-if (app.z.config.ratelimit) require("./ratelimit")(app);
+if (config.ext_compress) require("./compress")(app);
+if (config.ext_prometheus) require("./prometheus")(app);
+if (config.ext_redis) require("./redis")(app);
+if (config.ext_helmet) require("./helmet")(app);
+if (config.ext_cors) require("./cors")(app);
+if (config.ext_ratelimit) require("./ratelimit")(app);
 
 require("./maintenance")(app);
 require("./bootstrap")(app);

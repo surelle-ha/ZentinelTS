@@ -68,6 +68,7 @@
 		"express-prometheus-middleware": "^1.2.0",
 		"express-rate-limit": "^7.4.0",
 		"express-sslify": "^1.2.0",
+		"express-subdomain": "^1.0.6",
 		"express-validator": "^7.1.0",
 		"figlet": "^1.7.0",
 		"helmet": "^7.1.0",

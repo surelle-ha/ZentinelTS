@@ -5,14 +5,14 @@ import Redis from "ioredis";
 module.exports = async function setupRedis(app: Express): Promise<void> {
 	const { env, logger } = app.z;
 	try {
-		const redisConfig = env.REDIS_CONNECTION
-			? { uri: env.REDIS_CONNECTION }
+		const redisConfig = env.redis.connection
+			? { uri: env.redis.connection }
 			: {
-					port: parseInt(env.REDIS_PORT || "6379", 10),
-					host: env.REDIS_HOST || "localhost",
-					username: env.REDIS_USERNAME || "",
-					password: env.REDIS_PASSWORD || "",
-					db: parseInt(env.REDIS_DB || "0", 10),
+					port: env.redis.port,
+					host: env.redis.host,
+					username: env.redis.username,
+					password: env.redis.password,
+					db: env.redis.database,
 			  };
 
 		app.z.redis = new Redis(redisConfig);

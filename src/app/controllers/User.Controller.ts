@@ -1,12 +1,13 @@
-require("dotenv").config();
 const bcrypt = require("bcrypt");
 import { Express, Request, Response } from "express";
 
-const bcryptRounds: number = Number(process.env.BCRYPT_ROUNDS);
 
 module.exports = (app: Express) => {
+	const { env } = app.z;
     const { User, Role } = app.z.models;
     const { NotFoundError } = app.z.exceptions.Common;
+    
+    const bcryptRounds: number = Number(env.auth.bcrypt_rounds);
 
     const Controller: object = {
         name: "User",

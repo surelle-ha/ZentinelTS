@@ -14,7 +14,7 @@ module.exports = async function setupException(app: Express): Promise<void> {
 			success: err.success || false,
 			message,
 			error: err.name || "Error",
-			...(env.APP_ENV !== "production" ? { stack: err.stack } : {}),
+			...(env.app.environment !== "production" ? { stack: err.stack } : {}),
 		});
 	});
 

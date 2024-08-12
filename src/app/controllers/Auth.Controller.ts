@@ -6,7 +6,7 @@ module.exports = function (app: Express) {
 	const { env } = app.z;
 	const { User, Session } = app.z.models;
 
-	const bcryptRounds: number = Number(env.BCRYPT_ROUNDS);
+	const bcryptRounds: number = Number(env.auth.bcrypt_rounds);
 
 	const Controller = {
 		name: "Auth",
@@ -28,7 +28,7 @@ module.exports = function (app: Express) {
 
 			const token = jwt.sign(
 				{ userId: user.id, email: user.email },
-				env.APP_KEY || "secret",
+				env.app.key || "secret",
 				{ expiresIn: "24h" }
 			);
 
@@ -37,7 +37,7 @@ module.exports = function (app: Express) {
 			await Session.create({
 				userId: user.id,
 				token,
-				expiresAt: new Date(Date.now() + Number(env.SESSION_LIFETIME)),
+				expiresAt: new Date(Date.now() + Number(env.auth.session_lifetime)),
 			});
 
 			return res.status(200).json({

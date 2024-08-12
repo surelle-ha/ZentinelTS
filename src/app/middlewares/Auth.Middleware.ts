@@ -2,7 +2,7 @@ import { Express, Request, Response, NextFunction } from "express";
 const jwt = require("jsonwebtoken");
 
 module.exports = function (app: Express) {
-
+	const { env } = app.z;
 	const { User, Session } = app.z.models;
 	
 	const Middleware = {
@@ -18,7 +18,7 @@ module.exports = function (app: Express) {
 
 				jwt.verify(
 					token,
-					process.env.APP_KEY,
+					env.app.key,
 					async (err: any, decoded: any) => {
 						if (err) {
 							console.error("JWT Verification Error:", err);

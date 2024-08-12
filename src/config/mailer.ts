@@ -4,18 +4,18 @@ import { Express } from 'express';
 
 module.exports = function setupMailer (app: Express) {
 	const { env } = app.z;
-	const secureConnection = (env.MAILER_SECURE || 'false').toLowerCase() === 'true';
+	const secureConnection = env.mailer.secure;
 	
 	app.z.mailer = nodemailer.createTransport({
-		port: parseInt(env.MAILER_PORT || '587', 10), 
-		host: env.MAILER_HOST,
+		port: env.mailer.port, 
+		host: env.mailer.host,
         secureConnection: secureConnection,
 		auth: {
-			user: env.MAILER_USER,
-			pass: env.MAILER_PASS,
+			user: env.mailer.username,
+			pass: env.mailer.password,
 		},
 		tls: {
-            ciphers: env.MAILER_CIPHER
+            ciphers: env.mailer.cipher
         }
 	});
 };

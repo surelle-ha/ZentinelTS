@@ -6,16 +6,11 @@ const os = require("os");
 
 const { env, server, logger } = app.z;
 
-const appName = env.APP_NAME || "DefaultAppName";
-const appPort = env.APP_PORT || "3000";
-const appEnv = env.APP_ENV || "development";
-const appBase = env.APP_BASE || "http://localhost";
-
-server.listen(appPort, () => {
+server.listen(env.app.port, () => {
 	// clear();
 	console.log(
 		chalk.blue(
-			figlet.textSync(appName, {
+			figlet.textSync(env.app.name, {
 				font: "Ogre",
 				horizontalLayout: "full",
 				verticalLayout: "default",
@@ -26,10 +21,10 @@ server.listen(appPort, () => {
 	);
 	console.log(
 		chalk.blue(
-			`${appName.toUpperCase()} SERVER RUNNING IN ${appEnv.toUpperCase()} ENVIRONMENT`
+			`${env.app.name.toUpperCase()} SERVER RUNNING IN ${env.app.environment.toUpperCase()} ENVIRONMENT`
 		)
 	);
-	console.log(`\t\n\t- Local:\t${chalk.green(appBase + ":" + appPort)}`);
+	console.log(`\t\n\t- Local:\t${chalk.green(env.app.base + ":" + env.app.port)}`);
 
 	const networkInterfaces = os.networkInterfaces();
 	for (const interfaceName in networkInterfaces) {
@@ -39,7 +34,7 @@ server.listen(appPort, () => {
 				if (alias.family === "IPv4" && !alias.internal) {
 					console.log(
 						`\t- Network:\t${chalk.green(
-							"http://" + alias.address + ":" + appPort
+							"http://" + alias.address + ":" + env.app.port
 						)}`
 					);
 				}
@@ -48,5 +43,5 @@ server.listen(appPort, () => {
 	}
 
 	console.log(chalk.blue(`\nServer Logs:`));
-	logger.info(chalk.yellow(`${appName} has started.`));
+	logger.info(chalk.yellow(`${env.app.name} has started.`));
 });
